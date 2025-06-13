@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fade-image-1 {
+  0%, 100% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+}
+@keyframes fade-image-2 {
+  0%, 100% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  70% { opacity: 0; }
+}
+@keyframes fade-image-3 {
+  0%, 100% { opacity: 0; }
+  70% { opacity: 1; }
+  90% { opacity: 1; }
+}
+
+.animate-fade-image-1 {
+  animation: fade-image-1 18s infinite;
+}
+.animate-fade-image-2 {
+  animation: fade-image-2 18s infinite;
+}
+.animate-fade-image-3 {
+  animation: fade-image-3 18s infinite;
+}
+/* In index.css or App.css */
+html {
+  scroll-behavior: smooth;
+}
