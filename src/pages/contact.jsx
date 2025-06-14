@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const fadeVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -51,15 +52,14 @@ const Contact = () => {
           variants={fadeVariant}
         >
           <iframe
-            title="Sign Galaxy Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15569.370215063997!2d76.9007015!3d15.139393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba3c6b72694dd67%3A0x6ea76f4006e49d56!2sBallari%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1718181335647!5m2!1sen!2sin"
-            width="100%"
-            height="100%"
-            allowFullScreen=""
-            loading="lazy"
-            className="w-full h-full"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+  className="rounded-xl shadow-xl w-full h-64 md:h-80"
+  src="https://maps.google.com/maps?q=Kumar%20Swamy%20Temple%20Indira%20Nagar%20Ballari%20Karnataka%20583101&output=embed"
+  allowFullScreen=""
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  title="Sign Galaxy Location"
+/>
+
         </motion.div>
       </div>
     </div>

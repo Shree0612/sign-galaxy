@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -16,6 +18,7 @@ const images = [
 ];
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -45,17 +48,22 @@ function App() {
 
         {/* Navbar */}
         <header className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-30 backdrop-blur-sm">
-          <nav className="flex justify-between items-center px-8 py-6">
-<img
-  src="/images/logo1.png"
-  alt="Sign Galaxy Logo"
-        className="h-12 w-auto object-contain" // <-- Adjust height here (try h-14 to h-16)
-/>
-            <ul className="flex space-x-6 text-lg font-medium">
-              <li><a href="/" className="hover:text-yellow-300 transition">Home</a></li>
-              <li><a href="#about" className="hover:text-yellow-300 transition">About Us</a></li>
-              <li><a href="/services" className="hover:text-yellow-300 transition">Services</a></li>
-              <li><a href="#contact" className="hover:text-yellow-300 transition">Contact</a></li>
+          <nav className="flex justify-between items-center px-6 py-4">
+            <img
+              src="/images/logo1.png"
+              alt="Sign Galaxy Logo"
+              className="h-16 w-auto object-contain"
+            />
+            <div className="md:hidden">
+              <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none text-2xl">
+                ☰
+              </button>
+            </div>
+            <ul className={`flex-col md:flex-row md:flex space-y-4 md:space-y-0 md:space-x-6 text-lg font-medium absolute md:static top-full left-0 w-full md:w-auto bg-black md:bg-transparent px-6 py-4 md:p-0 transition-all duration-300 ease-in-out ${menuOpen ? 'flex' : 'hidden'}`}>
+<a href="#home" className="hover:text-yellow-300 transition">Home</a>
+<a href="#about" className="hover:text-yellow-300 transition">About Us</a>
+              <a href="/#services" className="hover:text-yellow-300 transition">Services</a>
+  <a href="#contact" className="hover:text-yellow-300 transition">Contact</a>
             </ul>
           </nav>
         </header>
@@ -98,43 +106,43 @@ function App() {
                     <p className="text-lg leading-8 mb-8">
                       With an innovative approach and an eye for detail, we’ve earned recognition for our exceptional work, leaving an indelible mark on interiors, exteriors, and branding environments alike.
                     </p>
-                  
                   </div>
                 </motion.section>
-<motion.section
-  id="clients"
-  className="bg-black py-16 text-white"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 1 }}
->
-  <h2 className="text-3xl font-bold text-center text-yellow-300 mb-8">
-    Our Esteemed Clients
-  </h2>
-  <div className="overflow-hidden">
-    <div className="flex space-x-12 animate-scroll px-6">
-      {[
-    "work1.jpg",
-    "work2.jpg",
-    "work3.jpg",
-    "work4.jpg",
-    "work5.png",
-    "work6.jpeg",
-    "work7.jpg"
-  ].map((img, index) => (
-    <img
-      key={index}
-      src={`/images/${img}`}
-      alt={`Client ${index + 1}`}
-      className="h-20 object-contain opacity-80 hover:opacity-100 transition duration-300"
-    />
-      ))}
-      <span className="text-xl text-gray-400 whitespace-nowrap pt-6">...and many more</span>
-    </div>
-  </div>
-</motion.section>
 
+                {/* Clients Section */}
+                <motion.section
+                  id="clients"
+                  className="bg-black py-16 text-white"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1 }}
+                >
+                  <h2 className="text-3xl font-bold text-center text-yellow-300 mb-8">
+                    Our Esteemed Clients
+                  </h2>
+                  <div className="overflow-hidden">
+                    <div className="flex space-x-12 animate-scroll px-6">
+                      {[
+                        "work1.jpg",
+                        "work2.jpg",
+                        "work3.jpg",
+                        "work4.jpg",
+                        "work5.png",
+                        "work6.jpeg",
+                        "work7.jpg"
+                      ].map((img, index) => (
+                        <img
+                          key={index}
+                          src={`/images/${img}`}
+                          alt={`Client ${index + 1}`}
+                          className="h-24 object-contain opacity-80 hover:opacity-100 transition duration-300"
+                        />
+                      ))}
+                      <span className="text-xl text-gray-400 whitespace-nowrap pt-6">...and many more</span>
+                    </div>
+                  </div>
+                </motion.section>
 
                 {/* Founder Section */}
                 <motion.section
@@ -165,49 +173,66 @@ function App() {
                     </div>
                   </div>
                 </motion.section>
-                {/* Services Overview Section */}
-<motion.section
-  id="services"
-  className="bg-gradient-to-b from-black via-gray-900 to-black py-20 px-6 text-white scroll-mt-28"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 1 }}
->
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-bold mb-10 text-yellow-300">Our Services</h2>
-    <div className="grid md:grid-cols-3 gap-10">
-      {/* Interior */}
-      <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-yellow-300 transition duration-300">
-        <img src="/images/mainimages/interiormain.jpg" alt="Interior" className="w-full h-40 object-cover rounded-md mb-4" />
-        <h3 className="text-2xl font-semibold mb-2 text-white">Interior Design</h3>
-        <p className="text-gray-300 mb-4">Creating stylish, functional interiors that reflect your identity and purpose.</p>
-        <a href="/services/interior" className="text-yellow-300 hover:underline">Learn More →</a>
-      </div>
 
-      {/* Exterior */}
-      <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-yellow-300 transition duration-300">
-        <img src="/images/mainimages/exteriormain.jpg" alt="Exterior" className="w-full h-40 object-cover rounded-md mb-4" />
-        <h3 className="text-2xl font-semibold mb-2 text-white">Exterior Design</h3>
-        <p className="text-gray-300 mb-4">Elevating building facades and outdoor spaces with elegance and precision.</p>
-        <a href="/services/exterior" className="text-yellow-300 hover:underline">Learn More →</a>
-      </div>
+                {/* Services Section */}
+                <motion.section
+                  id="services"
+                  className="bg-gradient-to-b from-black via-gray-900 to-black py-20 px-6 text-white scroll-mt-28"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1 }}
+                >
+                  <div className="max-w-6xl mx-auto text-center">
+                    <h2 className="text-4xl font-bold mb-10 text-yellow-300">Our Services</h2>
 
-      {/* Signage */}
-      <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-yellow-300 transition duration-300">
-        <img src="/images/mainimages/signagemain.jpg" alt="Signage" className="w-full h-40 object-cover rounded-md mb-4" />
-        <h3 className="text-2xl font-semibold mb-2 text-white">Signage Solutions</h3>
-        <p className="text-gray-300 mb-4">Crafting bold signage to capture attention and reinforce your brand.</p>
-        <a href="/services/signage" className="text-yellow-300 hover:underline">Learn More →</a>
-      </div>
-    </div>
-  </div>
-</motion.section>
+                    <div className="grid md:grid-cols-3 gap-10">
+                      <Link to="/services/interior" className="block bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition transform hover:scale-105 group">
+                        <img
+                          src="/images/mainimages/interiormain.jpg"
+                          alt="Interior Design"
+                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="p-4 text-black">
+                          <h3 className="text-xl font-bold mb-2">Interior</h3>
+                          <p className="mb-4">Elegant designs for your indoor spaces.</p>
+                          <span className="text-blue-500 font-medium hover:underline">Learn More</span>
+                        </div>
+                      </Link>
 
+                      <Link to="/services/exterior" className="block bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition transform hover:scale-105 group">
+                        <img
+                          src="/images/mainimages/exteriormain.jpg"
+                          alt="Exterior Design"
+                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="p-4 text-black">
+                          <h3 className="text-xl font-bold mb-2">Exterior Design</h3>
+                          <p className="mb-4">Elevating building facades and outdoor spaces with elegance and precision.</p>
+                          <span className="text-blue-500 font-medium hover:underline">Learn More</span>
+                        </div>
+                      </Link>
+
+                      <Link to="/services/signage" className="block bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition transform hover:scale-105 group">
+                        <img
+                          src="/images/mainimages/signagemain.jpg"
+                          alt="Signage Solutions"
+                          className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="p-4 text-black">
+                          <h3 className="text-xl font-bold mb-2">Signage Solutions</h3>
+                          <p className="mb-4">Crafting bold signage to capture attention and reinforce your brand.</p>
+                          <span className="text-blue-500 font-medium hover:underline">Learn More</span>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </motion.section>
 
                 {/* Contact Section */}
                 <motion.section
                   id="contact"
+                  
                   className="bg-gradient-to-b from-black via-gray-900 to-black py-20 px-6 text-white scroll-mt-28"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -217,11 +242,10 @@ function App() {
                   <div className="max-w-6xl mx-auto text-center">
                     <h2 className="text-4xl font-bold text-yellow-300 mb-10">Contact Us</h2>
                     <p className="text-lg mb-6">We'd love to hear from you! Get in touch via call or visit us directly.</p>
-
                     <div className="grid md:grid-cols-2 gap-10 items-center">
                       <div className="space-y-4 text-left">
-                        <p><span className="text-yellow-300 font-semibold">Phone:</span> <a href="tel:+919448899888" className="hover:underline">+91 94488 99888</a></p>
-                        <p><span className="text-yellow-300 font-semibold">Email:</span> <a href="mailto:contact@signgalaxy.in" className="hover:underline">contact@signgalaxy.in</a></p>
+                        <p><span className="text-yellow-300 font-semibold">Phone:</span> <a href="tel:+91 7353737793" className="hover:underline">+91 7353737793</a></p>
+                        <p><span className="text-yellow-300 font-semibold">Email:</span> <a href="mailto:info@singalaxy.in" className="hover:underline">contact@signgalaxy.in</a></p>
                         <p><span className="text-yellow-300 font-semibold">Location:</span> Ballari, Karnataka, India</p>
                       </div>
                       <iframe
@@ -234,6 +258,18 @@ function App() {
                       />
                     </div>
                   </div>
+                  <div className="mt-10 flex justify-center">
+  <a
+    href="https://www.instagram.com/sign_galaxy_/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 bg-white bg-opacity-10 hover:bg-yellow-300 transition-all duration-300 px-5 py-3 rounded-full"
+  >
+    <FaInstagram className="text-pink-500 text-2xl" />
+    <span className="text-white font-medium">Follow us on Instagram</span>
+  </a>
+</div>
+
                 </motion.section>
               </>
             } />
@@ -246,23 +282,29 @@ function App() {
           </Routes>
         </main>
       </div>
+      
       <InstagramIcon />
+      <footer className="bg-black bg-opacity-70 text-white py-6 px-4 text-center z-50 relative">
+  <img
+    src="/images/logo1.png"
+    alt="Sign Galaxy Logo"
+    className="mx-auto h-12 mb-3"
+  />
+  <p className="text-sm">&copy; {new Date().getFullYear()} Sign Galaxy. All rights reserved.</p>
+  <p className="text-sm">Crafted with ❤️ in Ballari</p>
+</footer>
 
     </Router>
   );
 }
+
 const InstagramIcon = () => {
-  return (
-    <div className="fixed top-1/2 left-4 transform -translate-y-1/2 z-50">
-      <a
-        href="https://www.instagram.com/p/C7yv0LpSsvv/?utm_source=ig_web_copy_link"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group bg-black bg-opacity-40 p-3 rounded-full hover:bg-yellow-300 transition-all duration-300"
-      >
-        <FaInstagram className="text-white group-hover:text-black text-2xl" />
-      </a>
-    </div>
-  );
+  <div className="bg-black py-10 px-6 text-center">
+  <h3 className="text-white text-xl md:text-2xl font-semibold">
+    All Your Branding Needs Under One Roof – <span className="text-yellow-400">Sign Galaxy</span>
+  </h3>
+</div>
+
 };
+
 export default App;

@@ -51,7 +51,7 @@ const Signages = () => {
     </button>
 
     <h2 className="text-4xl font-bold text-yellow-300 text-center mb-10">
-      Interior Design Works
+      Signage Solutions
       </h2>
 
       {signageCategories.map((category, catIndex) => (

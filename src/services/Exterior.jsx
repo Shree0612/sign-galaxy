@@ -51,7 +51,7 @@ const Exterior = () => {
     </button>
 
     <h2 className="text-4xl font-bold text-yellow-300 text-center mb-10">
-      Interior Design Works
+     Exterior Designs Works
       </h2>
 
       {exteriorCategories.map((category, catIndex) => (
